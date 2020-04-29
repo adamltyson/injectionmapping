@@ -2,8 +2,13 @@ from imlib.plotting.colors import get_random_vtkplotter_color
 
 
 def load_obj_into_brainrender(
-    scene, obj_file, color=None, alpha=0.8, shading="phong",
-        flag=False, name=None
+    scene,
+    obj_file,
+    color=None,
+    alpha=0.8,
+    shading="phong",
+    flag=False,
+    name=None,
 ):
     """
     Loads a single obj file into brainrender
@@ -29,4 +34,3 @@ def load_obj_into_brainrender(
     if name is not None:
         if flag:
             act.flag(name)
-

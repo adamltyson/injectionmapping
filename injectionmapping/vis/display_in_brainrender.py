@@ -41,12 +41,16 @@ scene.add_brain_regions(
 if flag:
     scene.actors["regions"]["RSP"].flag("RSP")
 
-#Add regions
+# Add regions
 for obj_file in list_obj_files:
     obj_path = Path(obj_file)
     load_obj_into_brainrender(
-        scene, obj_file, alpha=region_alpha, shading="flat", flag=flag,
-        name=str(Path(obj_file).stem)
+        scene,
+        obj_file,
+        alpha=region_alpha,
+        shading="flat",
+        flag=flag,
+        name=str(Path(obj_file).stem),
     )
 
 # Display
