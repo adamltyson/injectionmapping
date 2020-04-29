@@ -19,8 +19,8 @@ master_directory = Path(master_directory)
 glob_pattern = str(master_directory / "**/summary.csv")
 list_csv_files = glob(glob_pattern, recursive=True)
 
-df = pd.DataFrame
+df = pd.DataFrame()
 
 for csv_file in list_csv_files:
     new_df = pd.read_csv(csv_file)
-    df.append(new_df, ignore_index=True)
+    df = df.append(new_df, ignore_index=True)
