@@ -1,3 +1,5 @@
+midline = 5700
+
 RSP_info = {
     "x_min_um_left": 2940,
     "y_min_um_left": 160,
