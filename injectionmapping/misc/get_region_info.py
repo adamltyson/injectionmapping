@@ -3,9 +3,10 @@ from skimage.measure import regionprops
 
 from brainio.brainio import load_any
 from imlib.source.source_files import get_structures_path
+from imlib.source.source_files import source_custom_config_amap
 from neuro.structures.IO import load_structures_as_df
 from neuro.atlas_tools import paths as reg_paths
-
+from neuro.atlas_tools.misc import get_voxel_volume, get_atlas_pixel_sizes
 import napari
 import numpy as np
 
@@ -15,7 +16,7 @@ amap_output_dir = (
 
 
 region_acronym = "RSP"
-visual_check = True
+visual_check = False
 
 left_hemisphere_value = 2
 right_hemisphere_value = 1
@@ -51,26 +52,39 @@ right_region_mask = region_mask * (hemispheres_image == right_hemisphere_value)
 left_region_summary = regionprops(left_region_mask.astype(np.int8))[0]
 right_region_summary = regionprops(right_region_mask.astype(np.int8))[0]
 
+atlas_pixel_sizes = get_atlas_pixel_sizes(source_custom_config_amap())
 
 results_dict = {
-    "x_min_um_left": left_region_summary.bbox[0],
-    "y_min_um_left": left_region_summary.bbox[1],
-    "z_min_um_left": left_region_summary.bbox[2],
-    "x_max_um_left": left_region_summary.bbox[3],
-    "y_max_um_left": left_region_summary.bbox[4],
-    "z_max_um_left": left_region_summary.bbox[5],
-    "x_center_um_left": left_region_summary.centroid[0],
-    "y_center_um_left": left_region_summary.centroid[1],
-    "z_center_um_left": left_region_summary.centroid[2],
-    "x_min_um_right": right_region_summary.bbox[0],
-    "y_min_um_right": right_region_summary.bbox[1],
-    "z_min_um_right": right_region_summary.bbox[2],
-    "x_max_um_right": right_region_summary.bbox[3],
-    "y_max_um_right": right_region_summary.bbox[4],
-    "z_max_um_right": right_region_summary.bbox[5],
-    "x_center_um_right": right_region_summary.centroid[0],
-    "y_center_um_right": right_region_summary.centroid[1],
-    "z_center_um_right": right_region_summary.centroid[2],
+    "x_min_um_left": left_region_summary.bbox[0] * int(atlas_pixel_sizes["x"]),
+    "y_min_um_left": left_region_summary.bbox[1] * int(atlas_pixel_sizes["y"]),
+    "z_min_um_left": left_region_summary.bbox[2] * int(atlas_pixel_sizes["z"]),
+    "x_max_um_left": left_region_summary.bbox[3] * int(atlas_pixel_sizes["x"]),
+    "y_max_um_left": left_region_summary.bbox[4] * int(atlas_pixel_sizes["y"]),
+    "z_max_um_left": left_region_summary.bbox[5] * int(atlas_pixel_sizes["z"]),
+    "x_center_um_left": left_region_summary.centroid[0]
+    * int(atlas_pixel_sizes["x"]),
+    "y_center_um_left": left_region_summary.centroid[1]
+    * int(atlas_pixel_sizes["y"]),
+    "z_center_um_left": left_region_summary.centroid[2]
+    * int(atlas_pixel_sizes["z"]),
+    "x_min_um_right": right_region_summary.bbox[0]
+    * int(atlas_pixel_sizes["x"]),
+    "y_min_um_right": right_region_summary.bbox[1]
+    * int(atlas_pixel_sizes["y"]),
+    "z_min_um_right": right_region_summary.bbox[2]
+    * int(atlas_pixel_sizes["z"]),
+    "x_max_um_right": right_region_summary.bbox[3]
+    * int(atlas_pixel_sizes["x"]),
+    "y_max_um_right": right_region_summary.bbox[4]
+    * int(atlas_pixel_sizes["y"]),
+    "z_max_um_right": right_region_summary.bbox[5]
+    * int(atlas_pixel_sizes["z"]),
+    "x_center_um_right": right_region_summary.centroid[0]
+    * int(atlas_pixel_sizes["x"]),
+    "y_center_um_right": right_region_summary.centroid[1]
+    * int(atlas_pixel_sizes["y"]),
+    "z_center_um_right": right_region_summary.centroid[2]
+    * int(atlas_pixel_sizes["z"]),
 }
 
 
