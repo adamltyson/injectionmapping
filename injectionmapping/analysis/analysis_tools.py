@@ -7,5 +7,5 @@ def distance_from_midline(x_value, midline=midline):
     return abs(x_value - midline)
 
 
-def distance_from_a_p_midpoint(x_value, midpoint=a_p_midpoint):
-    return x_value - a_p_midpoint
+def distance_from_a_p_midpoint(value):
+    return value - a_p_midpoint

@@ -48,3 +48,5 @@ plt.figure()
 g = sns.jointplot(
     "M-L", "A-P", data=df, kind="kde", space=0, color="paleturquoise"
 )
+
+# g.savefig("/home/adam/Desktop/fig.pdf")

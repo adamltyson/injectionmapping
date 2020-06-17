@@ -35,9 +35,7 @@ list_obj_files = glob(glob_pattern, recursive=True)
 scene = Scene()
 
 # Add RSP
-scene.add_brain_regions(
-    ["RSP"], use_original_color=True, wireframe=RSP_wireframe
-)
+scene.add_brain_regions(["RSP"], wireframe=RSP_wireframe, color="gray")
 if flag:
     scene.actors["regions"]["RSP"].flag("RSP")
 
